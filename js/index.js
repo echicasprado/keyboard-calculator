@@ -1,44 +1,46 @@
-var numero1 = "";
-var numero2 = "";
-var activoIgual = false;
-var activoOperacion = false;
-
+/**
+ * Obtener codigo de tecla presionada
+ * @param {*} key 
+ */
 function getKeyCode(key){
     switch(key.keyCode){
         case 187: //suma
-            alert("suma");
+            this.guardarNumero1('suma');
             break;
         case 189: //resta
-            alert("resta");
+            this.guardarNumero1('resta');
             break;
         case 56: //multiplicacion
-            alert("multiplicacion");
+            this.guardarNumero1('mulplicacion');
             break;
         case 191: //division
-            alert("division");
+            this.guardarNumero1('division');
+            break;
+        case 54: //potencia
+            this.guardarNumero1('potencia');
             break;
         case 13: //igual
-            alert("igual");
+            this.generarResultado();
             break;
         case 8://restar un numero
-            alert("restar un numero a al display")
             break;
         default://validar numero
-            // alert("tengo que validar numero el rango es de 48 al 57");
-            validarNumero(key);
+            this.validarNumero(key);
             break;
     }
 }
 
-function validarNumero(key){
-    if(activoOperacion){
-        numero2 += key.key;
-        document.getElementById("display").value = numero2;
-    }else{
-        numero1 += key.key;
-        document.getElementById("display").value = numero1;
+/**
+ * Esta funcion solo valida que el key sea un numero valido y lo muestra en el display
+ * 
+ * @param {string} key 
+ */
+function validarNumero(key){  
+    console.log(key);
+    if(key.keyCode >= 65 && key.keyCode <= 90){
+        alert(`No se permite valores, no numericos.\n Valor ingresado: ${key.key}`);
+        this.eliminarCaracterDisplay();
     }
 }
 
-
-window.addEventListener("keydown", getKeyCode,false);
+window.addEventListener("keyup", getKeyCode,false);
