@@ -36,7 +36,6 @@ function getKeyCode(key){
  * @param {string} key 
  */
 function validarNumero(key){  
-    console.log(key);
     if(key.keyCode >= 65 && key.keyCode <= 90){
         alert(`No se permite valores, no numericos.\n Valor ingresado: ${key.key}`);
         this.eliminarCaracterDisplay();
