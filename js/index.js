@@ -3,43 +3,66 @@
  * @param {*} key 
  */
 function getKeyCode(key){
-    switch(key.keyCode){
-        case 187: //suma
+    switch(key.key){
+        case '+':
             this.guardarNumero1('suma');
             break;
-        case 189: //resta
+        case '-':
             this.guardarNumero1('resta');
             break;
-        case 56: //multiplicacion
+        case '*':
             this.guardarNumero1('mulplicacion');
             break;
-        case 191: //division
+        case '/':
             this.guardarNumero1('division');
             break;
-        case 54: //potencia
+        case '^':
             this.guardarNumero1('potencia');
             break;
-        case 13: //igual
+        case 'Enter':
             this.generarResultado();
             break;
-        case 8://restar un numero
+        case 'Backspace':
             break;
-        default://validar numero
+        default:
             this.validarNumero(key);
             break;
     }
 }
 
 /**
- * Esta funcion solo valida que el key sea un numero valido y lo muestra en el display
+ * Esta funcion solo valida que el key sea un numero valido
  * 
  * @param {string} key 
  */
 function validarNumero(key){  
-    if(key.keyCode >= 65 && key.keyCode <= 90){
-        alert(`No se permite valores, no numericos.\n Valor ingresado: ${key.key}`);
-        this.eliminarCaracterDisplay();
+    switch(key.key){
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case 'Shift':
+            break;
+        default:
+            this.valorNoValido(key);
+            break;
     }
+}
+
+/**
+ * Elimina la entrada del display y muestra mensaje con el key no valido.
+ * 
+ * @param {key} key 
+ */
+function valorNoValido(key){
+    alert(`No se permite valores, no numericos.\n Valor ingresado: ${key.key}`);
+    this.eliminarCaracterDisplay();
 }
 
 window.addEventListener("keyup", getKeyCode,false);

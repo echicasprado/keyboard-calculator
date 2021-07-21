@@ -57,25 +57,27 @@ function generarResultado(){
         switch(this.tipoOperacion){
             case 'suma':
                 this.numero1 = this.sumar(this.numero1,this.numero2);
-                this.mostrarDisplay(this.numero1);
                 break;
             case 'resta':
                 this.numero1 = this.resta(this.numero1,this.numero2);
-                this.mostrarDisplay(this.numero1);
                 break;
             case 'mulplicacion':
                 this.numero1 = this.multiplicacion(this.numero1,this.numero2);
-                this.mostrarDisplay(this.numero1);
                 break;
             case 'division':
                 this.numero1 = this.division(this.numero1,this.numero2);
-                this.mostrarDisplay(this.numero1);
                 break;
             case 'potencia':
                 this.numero1 = this.potencia(this.numero1,this.numero2);
-                this.mostrarDisplay(this.numero1);
                 break;
         }
+        
+        if(this.numero1 == NaN){
+            alert(`Error variable con valor ${this.numero1}`);
+        }else{
+            this.mostrarDisplay(this.numero1);
+        }
+
     }
     
 }
