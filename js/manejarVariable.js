@@ -5,6 +5,8 @@ var activoIgual = false;
 var activoOperacion = false;
 var tipoOperacion = '';
 
+var operacionesRealizadas = [];
+
 /**
  * Esta funcion permite validar que tipo de operacion quiero realizar y guardo el valor en la variable numero1
  * 
@@ -54,30 +56,62 @@ function generarResultado(){
     this.guardarNumero2();
 
     if(guardarNumero1){
+        let result = 0;
+
         switch(this.tipoOperacion){
-            case 'suma':
-                this.numero1 = this.sumar(this.numero1,this.numero2);
+            case '+':
+                result = this.sumar(this.numero1,this.numero2);
                 break;
-            case 'resta':
-                this.numero1 = this.resta(this.numero1,this.numero2);
+            case '-':
+                result = this.resta(this.numero1,this.numero2);
                 break;
-            case 'mulplicacion':
-                this.numero1 = this.multiplicacion(this.numero1,this.numero2);
+            case '*':
+                result = this.multiplicacion(this.numero1,this.numero2);
                 break;
-            case 'division':
-                this.numero1 = this.division(this.numero1,this.numero2);
+            case '/':
+                result = this.division(this.numero1,this.numero2);
                 break;
-            case 'potencia':
-                this.numero1 = this.potencia(this.numero1,this.numero2);
+            case '^':
+                result = this.potencia(this.numero1,this.numero2);
                 break;
         }
         
-        if(this.numero1 == NaN){
-            alert(`Error variable con valor ${this.numero1}`);
+        if(result == NaN){
+            alert(`Error variable con valor ${result}`);
         }else{
-            this.mostrarDisplay(this.numero1);
+            this.mostrarDisplay(result);
         }
 
+        this.guardarOperacion(this.numero1,this.numero2,this.tipoOperacion,result);
+        this.numero1 = result;
     }
     
+}
+
+/**
+ * Guarda la operacion que se esta realizando
+ * @param {float} numero1 
+ * @param {float} numero2 
+ * @param {string} tipoOperacion 
+ * @param {float} result 
+ */
+function guardarOperacion(num1,num2,tipoOp,result){
+    this.operacionesRealizadas.push({numero1:num1,numero2:num2,tipoOperacion:tipoOp,resultado:result});
+}
+
+/**
+ * Encargada de realizar el codigo html, y mostrar el historial de operaciones
+ */
+function imprimirOperaciones(){
+    document.getElementById("historico").innerHTML = '';
+
+    let ul = document.createElement("ul");
+
+    this.operacionesRealizadas.forEach(element => {
+        let li = document.createElement("li");
+        li.innerText = `${element.numero1} ${element.tipoOperacion} ${element.numero2} = ${element.resultado}`;
+        ul.appendChild(li);
+    });
+
+    document.getElementById("historico").appendChild(ul);
 }

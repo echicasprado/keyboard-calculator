@@ -5,19 +5,19 @@
 function getKeyCode(key){
     switch(key.key){
         case '+':
-            this.guardarNumero1('suma');
+            this.guardarNumero1(key.key);
             break;
         case '-':
-            this.guardarNumero1('resta');
+            this.guardarNumero1(key.key);
             break;
         case '*':
-            this.guardarNumero1('mulplicacion');
+            this.guardarNumero1(key.key);
             break;
         case '/':
-            this.guardarNumero1('division');
+            this.guardarNumero1(key.key);
             break;
         case '^':
-            this.guardarNumero1('potencia');
+            this.guardarNumero1(key.key);
             break;
         case 'Enter':
             this.generarResultado();
@@ -47,6 +47,7 @@ function validarNumero(key){
         case '7':
         case '8':
         case '9':
+        case '.':
         case 'Shift':
             break;
         default:
