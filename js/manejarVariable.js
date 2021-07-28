@@ -13,11 +13,12 @@ var operacionesRealizadas = [];
  * @param {string} tipoOperacion -> suma, resta, multiplicacion, division.
  */
 function guardarNumero1(tipoOperacion){
-    this.definirTipoOperacion(tipoOperacion);
+    this.almacenarTipoOperacion = tipoOperacion;
     this.eliminarCaracterDisplay();
 
-    if(this.numero1 == -1){
+    if(this.numero1 == -1 && this.obtenerValorDisplay() != ''){
         this.numero1 = parseFloat(this.obtenerValorDisplay());
+        this.definirTipoOperacion(this.almacenarTipoOperacion);
     }
 
     this.limpiarDisplay();
@@ -27,7 +28,11 @@ function guardarNumero1(tipoOperacion){
  * Esta funcion almacena el valor del display en la variable numero2
  */
 function guardarNumero2(){
-    this.numero2 = parseFloat(this.obtenerValorDisplay());
+
+    if(this.obtenerValorDisplay() != ''){
+        this.numero2 = parseFloat(this.obtenerValorDisplay());
+    }
+
     this.limpiarDisplay();
 }
 
@@ -55,7 +60,7 @@ function limpiarTipoOperacion(){
 function generarResultado(){
     this.guardarNumero2();
 
-    if(guardarNumero1){
+    if(this.numero1 != -1 && this.numero2 && -1){
         let result = 0;
 
         switch(this.tipoOperacion){
